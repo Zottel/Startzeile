@@ -13,29 +13,35 @@ class WebTestCase(unittest.TestCase):
 		pass
 
 
-class SimpleTestCase(WebTestCase):
+class BasicTestCase(WebTestCase):
 
-	def test_basic_index(self):
+	def test_basic_default(self):
 		resp = self.client.get('/')
-		print(resp.status_code)
-		print(resp.headers)
+		self.assertEqual(resp.status_code, 200)
+		#print(resp.status_code)
+		#print(resp.headers)
 		#print(resp.data)
 
 	def test_basic_link(self):
-		resp = self.client.get('/link/')
-		print(resp.status_code)
-		print(resp.headers)
+		resp = self.client.get('/link/%d.html' % 0)
+		self.assertEqual(resp.status_code, 200)
+		#print(resp.status_code)
+		#print(resp.headers)
+		#print(resp.data)
+
+	def test_basic_query(self):
+		resp = self.client.get('/query/all.html')
+		self.assertEqual(resp.status_code, 200)
+		#print(resp.status_code)
+		#print(resp.headers)
 		#print(resp.data)
 
 	def test_basic_tag(self):
-		resp = self.client.get('/tag/')
-		print(resp.status_code)
-		print(resp.headers)
+		resp = self.client.get('/tags/test.html')
+		self.assertEqual(resp.status_code, 200)
+		#print(resp.status_code)
+		#print(resp.headers)
 		#print(resp.data)
-
-
-
-
 
 
 def webSuite():
