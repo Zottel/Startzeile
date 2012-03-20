@@ -4,10 +4,17 @@ from startzeile.database import interface
 from startzeile.database import dummy
 
 class DBTestCase(unittest.TestCase):
+	def __init__(self, name = None):
+		super(DBTestCase, self).__init__()
+		self.backendName = name
+	
+	def shortDescription(self):
+		return 'Backend: %s ' % self.backendName
+	
 	def setUp(self):
 		self.db = dummy.Database()
 		pass
-
+	
 	def tearDown(self):
 		pass
 
@@ -63,43 +70,43 @@ class deleteLinkTest(DBTestCase):
 		self.assertNotIn(link, self.db.getLinksByTags(['b']))
 		self.assertNotIn(link, self.db.getLinksByTags(['c']))
 		
-		with self.assertRaises(interface.LinkDeletedException) as cm:
+		with self.assertRaises(interface.LinkDeletedException):
 			link.getID()
 		
-		with self.assertRaises(interface.LinkDeletedException) as cm:
+		with self.assertRaises(interface.LinkDeletedException):
 			link.getTitle()
 		
-		with self.assertRaises(interface.LinkDeletedException) as cm:
+		with self.assertRaises(interface.LinkDeletedException):
 			link.setTitle(None)
 		
-		with self.assertRaises(interface.LinkDeletedException) as cm:
+		with self.assertRaises(interface.LinkDeletedException):
 			link.getURL()
 		
-		with self.assertRaises(interface.LinkDeletedException) as cm:
+		with self.assertRaises(interface.LinkDeletedException):
 			link.setURL(None)
 		
-		with self.assertRaises(interface.LinkDeletedException) as cm:
+		with self.assertRaises(interface.LinkDeletedException):
 			link.getDescription()
 		
-		with self.assertRaises(interface.LinkDeletedException) as cm:
+		with self.assertRaises(interface.LinkDeletedException):
 			link.setDescription(None)
 		
-		with self.assertRaises(interface.LinkDeletedException) as cm:
+		with self.assertRaises(interface.LinkDeletedException):
 			link.getTags()
 		
-		with self.assertRaises(interface.LinkDeletedException) as cm:
+		with self.assertRaises(interface.LinkDeletedException):
 			link.setTags(None)
 		
-		with self.assertRaises(interface.LinkDeletedException) as cm:
+		with self.assertRaises(interface.LinkDeletedException):
 			link.delete()
 
 def createSuite():
 	suite = unittest.TestSuite()
 	tests = []
-	tests.append(AddLinkTest())
-	tests.append(getAllLinksTest())
-	tests.append(getLinksByTagsTest())
-	tests.append(changeTagsTest())
-	tests.append(deleteLinkTest())
+	tests.append(AddLinkTest('dummy'))
+	tests.append(getAllLinksTest('dummy'))
+	tests.append(getLinksByTagsTest('dummy'))
+	tests.append(changeTagsTest('dummy'))
+	tests.append(deleteLinkTest('dummy'))
 	suite.addTests(tests)
 	return suite
