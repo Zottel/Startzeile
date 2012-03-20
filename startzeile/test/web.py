@@ -2,6 +2,7 @@ import unittest
 
 from startzeile.web import create_app
 
+
 class WebTestCase(unittest.TestCase):
 
 	def setUp(self):
@@ -13,40 +14,46 @@ class WebTestCase(unittest.TestCase):
 		pass
 
 
-class BasicTestCase(WebTestCase):
-
-	def test_basic_default(self):
+class BasicDefaultTestCase(WebTestCase):
+	def runTest(self):
 		resp = self.client.get('/')
 		self.assertEqual(resp.status_code, 200)
 		#print(resp.status_code)
 		#print(resp.headers)
 		#print(resp.data)
 
-	def test_basic_link(self):
+class BasicLinkTestCase(WebTestCase):
+	def runTest(self):
 		resp = self.client.get('/link/%d.html' % 0)
 		self.assertEqual(resp.status_code, 200)
 		#print(resp.status_code)
 		#print(resp.headers)
 		#print(resp.data)
 
-	def test_basic_query(self):
+class BasicQueryTestCase(WebTestCase):
+	def runTest(self):
 		resp = self.client.get('/query/all.html')
 		self.assertEqual(resp.status_code, 200)
 		#print(resp.status_code)
 		#print(resp.headers)
 		#print(resp.data)
 
-	def test_basic_tag(self):
+class BasicTagsTestCase(WebTestCase):
+	def runTest(self):
 		resp = self.client.get('/tags/test.html')
 		self.assertEqual(resp.status_code, 200)
 		#print(resp.status_code)
 		#print(resp.headers)
 		#print(resp.data)
 
-
 def createSuite():
 	suite = unittest.TestSuite()
-	suite.addTests(unittest.TestLoader().loadTestsFromTestCase(BasicTestCase))
+	tests = []
+	tests.append(BasicDefaultTestCase())
+	tests.append(BasicLinkTestCase())
+	tests.append(BasicQueryTestCase())
+	tests.append(BasicTagsTestCase())
+	suite.addTests(tests)
 	return suite
 
 
