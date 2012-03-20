@@ -44,12 +44,9 @@ class BasicTestCase(WebTestCase):
 		#print(resp.data)
 
 
-def webSuite():
-	suite = TestSuite()
-	tests1 = unittest.TestLoader().loadTestsFromTestCase(WebTestCase)
-	suite.addTests(tests1)
-	tests2 = unittest.TestLoader().loadTestsFromTestCase(WebTestCase2)
-	suite.addTests(tests2)
+def createSuite():
+	suite = unittest.TestSuite()
+	suite.addTests(unittest.TestLoader().loadTestsFromTestCase(BasicTestCase))
 	return suite
 
 
