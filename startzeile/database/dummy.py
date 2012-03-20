@@ -1,6 +1,6 @@
-import startzeile.database.interface
+from startzeile.database import interface
 
-class Database(startzeile.database.interface.Database):
+class Database(interface.Database):
 	def __init__(self):
 		self.links = {}
 		self.tags = {}
@@ -11,7 +11,7 @@ class Database(startzeile.database.interface.Database):
 		if link_id in self.links:
 			return self.links[link_id]
 		else:
-			raise startzeile.database.interface.LinkNotFoundException()
+			raise interface.LinkNotFoundException()
 	
 	def getAllLinks(self):
 		return self.links.values()
@@ -32,14 +32,17 @@ class Database(startzeile.database.interface.Database):
 	
 	def getLinksByQuery(self):
 		#TODO
+		raise interface.NotImplementedException()
 		pass
 	
 	def getTagsByTags(self, tags):
 		#TODO
+		raise interface.NotImplementedException()
 		pass
 	
 	def getTagsByQuery(self, tags):
 		#TODO
+		raise interface.NotImplementedException()
 		pass
 	
 	def addLink(self, title, url, description, tags):
@@ -57,7 +60,7 @@ class Database(startzeile.database.interface.Database):
 		
 		return newLink
 
-class Link(startzeile.database.interface.Link):
+class Link(interface.Link):
 	def __init__(self, db, linkID):
 		self.deleted = False
 		self.db = db
@@ -67,58 +70,60 @@ class Link(startzeile.database.interface.Link):
 		self.description = None
 		self.tags = set()
 	
+	def checkDeleted(f):
+		def newF(self, *args, **kws):
+			if self.deleted:
+				raise interface.LinkDeletedException
+			return f(self, *args, **kws)
+		return newF
+	
+	@checkDeleted
 	def getID(self):
-		if self.deleted:
-			raise startzeile.database.interface.LinkDeletedException
 		return self.id
 	
+	@checkDeleted
 	def getTitle(self):
-		if self.deleted:
-			raise startzeile.database.interface.LinkDeletedException
 		return self.title
 	
+	@checkDeleted
 	def setTitle(self, newTitle):
-		if self.deleted:
-			raise startzeile.database.interface.LinkDeletedException
 		self.title = newTitle
 	
+	@checkDeleted
 	def getURL(self):
-		if self.deleted:
-			raise startzeile.database.interface.LinkDeletedException
 		return self.url
 	
+	@checkDeleted
 	def setURL(self, newURL):
-		if self.deleted:
-			raise startzeile.database.interface.LinkDeletedException
 		self.url = newURL
 	
+	@checkDeleted
 	def getDescription(self):
-		if self.deleted:
-			raise startzeile.database.interface.LinkDeletedException
 		return self.description
 	
+	@checkDeleted
 	def setDescription(self, newDescription):
-		if self.deleted:
-			raise startzeile.database.interface.LinkDeletedException
 		self.description = newDescription
 	
+	@checkDeleted
 	def getTags(self):
-		if self.deleted:
-			raise startzeile.database.interface.LinkDeletedException
 		return self.tags
-	
-	def setTags(self, newTags, oldTags = []):
-		if self.deleted:
-			raise startzeile.database.interface.LinkDeletedException
-		for tag in newTags:
+
+	@checkDeleted
+	def setTags(self, newTags):
+		for tag in set(self.getTags()) - set(newTags):
+			if tag in self.db.tags:
+				self.db.tags[tag].remove(self)
+		
+		for tag in set(newTags) - set(self.getTags()):
 			if not tag in self.db.tags:
 				self.db.tags[tag] = set()
 			self.db.tags[tag].add(self)
-		# TODO: remove from old tags
 		
-		self.tags = newTags
+		self.tags = set(newTags)
 	
-	def delete():
+	@checkDeleted
+	def delete(self):
 		self.deleted = True
 		del self.db.links[self.id]
 		for tag in self.tags:

@@ -63,3 +63,6 @@ class LinkNotFoundException(Exception):
 
 class LinkDeletedException(Exception):
 	pass
+
+class NotImplementedException(Exception):
+	pass
