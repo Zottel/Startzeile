@@ -1,49 +1,65 @@
 
 class Database():
-	def __init__(config):
+	def __init__(self):
 		pass
 	
-	def getLink(link_id):
+	def getLink(self, link_id):
 		pass
 	
-	def getAllLinks():
+	def getAllLinks(self):
 		pass
 	
-	def getLinksByTags(tags):
+	def getLinksByTags(self, tags):
 		pass
 	
-	def getLinksByQuery():
+	def getLinksByQuery(self):
 		pass
 	
-	def getTagsByTags(tags):
+	def getTagsByTags(self, tags):
 		pass
 	
-	def getTagsByQuery(tags):
+	def getTagsByQuery(self, tags):
+		pass
+	
+	def addLink(self, title, url, description, tags):
 		pass
 
 class Link():
 	def __init__(self, db):
 		self.db = db
 	
-	def getTitle():
+	def getID(self):
 		pass
 	
-	def getID():
+	def getTitle(self):
 		pass
 	
-	def getURL():
+	def setTitle(self, newTitle):
 		pass
 	
-	def getDescription():
+	def getURL(self):
+		pass
+	
+	def setURL(self, newURL):
+		pass
+	
+	def getDescription(self):
+		pass
+	
+	def setDescription(self, newDescription):
+		pass
+	
+	def getTags(self, tags):
+		pass
+	
+	def setTags(self, newTags, oldTags = []):
+		pass
+	
+	def delete(self):
 		pass
 
-class Tag():
-	def __init__(self, db):
-		self.db = db
-	
-	def getName():
-		pass
-	
-	def getLinks():
-		pass
+class LinkNotFoundException(Exception):
+	pass
 
+class LinkDeletedException(Exception):
+	pass
