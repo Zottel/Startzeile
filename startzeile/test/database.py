@@ -4,19 +4,25 @@ from startzeile.database import interface
 from startzeile.database import dummy
 
 class DBTestCase(unittest.TestCase):
-	def __init__(self, name = None):
+	def __init__(self, database):
 		super(DBTestCase, self).__init__()
-		self.backendName = name
+		self.db = database
 	
 	def shortDescription(self):
-		return 'Backend: %s ' % self.backendName
+		return 'Backend: %s' % self.db.shortDescription()
 	
 	def setUp(self):
-		self.db = dummy.Database()
+		# Database has to be connected for our tests to work.
+		if not self.db.connected():
+			self.skipTest('not connected')
 		pass
 	
 	def tearDown(self):
 		pass
+
+class ConnectedTest(DBTestCase):
+	def runTest(self):
+		self.assertTrue(self.db.connected())
 
 class AddLinkTest(DBTestCase):
 	def runTest(self):
@@ -100,13 +106,19 @@ class deleteLinkTest(DBTestCase):
 		with self.assertRaises(interface.LinkDeletedException):
 			link.delete()
 
-def createSuite():
+def createDBSuite(db):
 	suite = unittest.TestSuite()
 	tests = []
-	tests.append(AddLinkTest('dummy'))
-	tests.append(getAllLinksTest('dummy'))
-	tests.append(getLinksByTagsTest('dummy'))
-	tests.append(changeTagsTest('dummy'))
-	tests.append(deleteLinkTest('dummy'))
+	tests.append(ConnectedTest(db))
+	tests.append(AddLinkTest(db))
+	tests.append(getAllLinksTest(db))
+	tests.append(getLinksByTagsTest(db))
+	tests.append(changeTagsTest(db))
+	tests.append(deleteLinkTest(db))
 	suite.addTests(tests)
 	return suite
+
+def createSuite():
+	suites = []
+	suites.append(createDBSuite(dummy.Database()))
+	return unittest.TestSuite(suites)
