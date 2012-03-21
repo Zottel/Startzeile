@@ -3,6 +3,12 @@ class Database():
 	def __init__(self):
 		pass
 	
+	def shortDescription(self):
+		return "Database Interface"
+	
+	def connected(self):
+		pass
+	
 	def getLink(self, link_id):
 		pass
 	

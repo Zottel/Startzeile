@@ -7,6 +7,12 @@ class Database(interface.Database):
 		self.nextID = 0
 		pass
 	
+	def shortDescription(self):
+		return "dummy database"
+	
+	def connected(self):
+		return True
+	
 	def getLink(self, link_id):
 		if link_id in self.links:
 			return self.links[link_id]
