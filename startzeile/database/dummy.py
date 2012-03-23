@@ -17,7 +17,7 @@ class Database(interface.Database):
 		if link_id in self.links:
 			return self.links[link_id]
 		else:
-			raise interface.LinkNotFoundException()
+			raise interface.LinkNotFound()
 	
 	def getAllLinks(self):
 		return self.links.values()
@@ -38,17 +38,17 @@ class Database(interface.Database):
 	
 	def getLinksByQuery(self):
 		#TODO
-		raise interface.NotImplementedException()
+		raise interface.NotImplemented()
 		pass
 	
 	def getTagsByTags(self, tags):
 		#TODO
-		raise interface.NotImplementedException()
+		raise interface.NotImplemented()
 		pass
 	
 	def getTagsByQuery(self, tags):
 		#TODO
-		raise interface.NotImplementedException()
+		raise interface.NotImplemented()
 		pass
 	
 	def addLink(self, title, url, description, tags):
@@ -79,7 +79,7 @@ class Link(interface.Link):
 	def checkDeleted(f):
 		def newF(self, *args, **kws):
 			if self.deleted:
-				raise interface.LinkDeletedException
+				raise interface.LinkDeleted
 			return f(self, *args, **kws)
 		return newF
 	

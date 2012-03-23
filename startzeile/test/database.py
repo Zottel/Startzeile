@@ -72,38 +72,40 @@ class deleteLinkTest(DBTestCase):
 	def runTest(self):
 		link = self.db.addLink(None, None, None, ['a', 'b', 'c'])
 		link.delete()
+		self.assertNotIn(link, self.db.getAllLinks())
+
 		self.assertNotIn(link, self.db.getLinksByTags(['a']))
 		self.assertNotIn(link, self.db.getLinksByTags(['b']))
 		self.assertNotIn(link, self.db.getLinksByTags(['c']))
 		
-		with self.assertRaises(interface.LinkDeletedException):
+		with self.assertRaises(interface.LinkDeleted):
 			link.getID()
 		
-		with self.assertRaises(interface.LinkDeletedException):
+		with self.assertRaises(interface.LinkDeleted):
 			link.getTitle()
 		
-		with self.assertRaises(interface.LinkDeletedException):
+		with self.assertRaises(interface.LinkDeleted):
 			link.setTitle(None)
 		
-		with self.assertRaises(interface.LinkDeletedException):
+		with self.assertRaises(interface.LinkDeleted):
 			link.getURL()
 		
-		with self.assertRaises(interface.LinkDeletedException):
+		with self.assertRaises(interface.LinkDeleted):
 			link.setURL(None)
 		
-		with self.assertRaises(interface.LinkDeletedException):
+		with self.assertRaises(interface.LinkDeleted):
 			link.getDescription()
 		
-		with self.assertRaises(interface.LinkDeletedException):
+		with self.assertRaises(interface.LinkDeleted):
 			link.setDescription(None)
 		
-		with self.assertRaises(interface.LinkDeletedException):
+		with self.assertRaises(interface.LinkDeleted):
 			link.getTags()
 		
-		with self.assertRaises(interface.LinkDeletedException):
+		with self.assertRaises(interface.LinkDeleted):
 			link.setTags(None)
 		
-		with self.assertRaises(interface.LinkDeletedException):
+		with self.assertRaises(interface.LinkDeleted):
 			link.delete()
 
 def createDBSuite(db):

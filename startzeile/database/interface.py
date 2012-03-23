@@ -64,11 +64,11 @@ class Link():
 	def delete(self):
 		pass
 
-class LinkNotFoundException(Exception):
+class LinkNotFound(Exception):
 	pass
 
-class LinkDeletedException(Exception):
+class LinkDeleted(Exception):
 	pass
 
-class NotImplementedException(Exception):
+class NotImplemented(Exception):
 	pass
