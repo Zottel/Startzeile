@@ -1,3 +1,5 @@
+# -*- coding: utf-8
+
 # Flask
 from flask import Flask, request, session, g, redirect, url_for, abort, render_template, flash
 
@@ -10,7 +12,7 @@ def create_app(startzeile, config):
 	
 	# Default page - only needed when visited by user => only html
 	@app.route('/')
-	@app.route('/index.html')
+	#@app.route('/index.html')
 	def show_default():
 		return render_template('index.xhtml')
 	
@@ -30,17 +32,17 @@ def create_app(startzeile, config):
 	
 	app.add_url_rule('/query.<filetype>',
 	                 view_func=query_view,
-									 defaults = {'querytype': 'post'},
+	                 defaults = {'querytype': 'post'},
 	                 methods=['POST'])
 	
 	app.add_url_rule('/query/all.<filetype>',
 	                 view_func=query_view,
-									 defaults = {'querytype': 'all'},
+	                 defaults = {'querytype': 'all'},
 	                 methods=['GET'])
 	
 	app.add_url_rule('/query/tags/<path:tags>.<filetype>',
 	                 view_func=query_view,
-									 defaults = {'querytype': 'tags'},
+	                 defaults = {'querytype': 'tags'},
 	                 methods=['GET'])
 	
 	# Tag view + url handling
@@ -57,5 +59,5 @@ def create_app(startzeile, config):
 	return app
 
 # Submodules
-__all__ = ['views']
+__all__ = ['link', 'tag', 'query']
 

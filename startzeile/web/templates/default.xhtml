@@ -14,24 +14,39 @@
 		<script type="text/javascript">
 			<!--//--><![CDATA[//><!--
 			$(function(){
-				var config = {
-					title: {{ config.TITLE if config.TITLE else ''|tojson|safe}}
-				};
+				var config = {interface: {query: {all: {}, post: {}, tags: {}}}};
+				config.title = {{ config.TITLE if config.TITLE else ''|tojson|safe}};
+				config.interface.query.all.html = '{{ url_for('query_api', querytype = 'all', filetype='html') }}';
+				config.interface.query.all.json = '{{ url_for('query_api', querytype = 'all', filetype='json') }}';
+				config.interface.query.post.html = '{{ url_for('query_api', querytype = 'post', filetype='html') }}';
+				config.interface.query.post.json = '{{ url_for('query_api', querytype = 'post', filetype='json') }}';
+				config.interface.query.tags.html = '{{ url_for('query_api', querytype = 'tags', tags='…', filetype='html') }}';
+				config.interface.query.tags.json = '{{ url_for('query_api', querytype = 'tags', tags='…', filetype='json') }}';
+				
 				Startzeile = new Startzeile(config);
+				
 				{% block script %}
 					
 				{% endblock %}
+				
+				
 			});
 			//--><!]]>
-		</script> 
+		</script>
 	</head>
 	<body>
-		<h1>Startzeile</h1>
-		<form method="POST" action="{{ url_for('query_api', type='html') }}">
+		<h1><a href="{{ url_for('show_default') }}">Startzeile</a></h1>
+		<form method="POST" action="{{ url_for('query_api', querytype = 'post', filetype='html') }}">
 			<input type="text" name="query" />
 		</form>
-
-		{% block content %}
+		<ul class="result_tags">
+		{% block result_tags %}
+			
 		{% endblock %}
+		</ul>
+		<ul class="result_pages">
+		{% block result_pages %}
+		{% endblock %}
+		</ul>
 	</body>
 </html>

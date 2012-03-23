@@ -10,7 +10,7 @@ class QueryView(View):
 		self.startzeile = startzeile
 	pass
 	
-	def dispatch_request(self, querytype, filetype, tags):
+	def dispatch_request(self, querytype, filetype, tags = None):
 		return render_template('default.xhtml')
 		pass
 	
