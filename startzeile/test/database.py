@@ -68,6 +68,16 @@ class changeTagsTest(DBTestCase):
 		self.assertIn(link, self.db.getLinksByTags(['b']))
 		self.assertNotIn(link, self.db.getLinksByTags(['a']))
 
+class tagQueryTest(DBTestCase):
+	def runTest(self):
+		link = self.db.addLink(None, None, None, ['tagquery_a', 'tagquery_b', 'tagquery_c']);
+		link2 = self.db.addLink(None, None, None, ['tagquery_a', 'tagquery_d']);
+		link3 = self.db.addLink(None, None, None, ['tagquery_b', 'tagquery_e']);
+		self.assertIn('tagquery_c', self.db.getTagsByTags(['tagquery_a', 'tagquery_b']));
+		self.assertNotIn('tagquery_d', self.db.getTagsByTags(['tagquery_a', 'tagquery_b']));
+		self.assertNotIn('tagquery_e', self.db.getTagsByTags(['tagquery_a', 'tagquery_b']));
+		self.assertIn('tagquery_d', self.db.getTagsByTags(['tagquery_a']));
+
 class deleteLinkTest(DBTestCase):
 	def runTest(self):
 		link = self.db.addLink(None, None, None, ['a', 'b', 'c'])
@@ -115,6 +125,7 @@ def createDBSuite(db):
 	tests.append(AddLinkTest(db))
 	tests.append(getAllLinksTest(db))
 	tests.append(getLinksByTagsTest(db))
+	tests.append(tagQueryTest(db))
 	tests.append(changeTagsTest(db))
 	tests.append(deleteLinkTest(db))
 	suite.addTests(tests)
