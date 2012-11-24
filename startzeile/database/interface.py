@@ -18,13 +18,13 @@ class Database():
 	def getLinksByTags(self, tags):
 		pass
 	
-	def getLinksByQuery(self):
+	def getLinksByQuery(self, query):
 		pass
 	
 	def getTagsByTags(self, tags):
 		pass
 	
-	def getTagsByQuery(self, tags):
+	def getTagsByQuery(self, query):
 		pass
 	
 	def addLink(self, title, url, description, tags):

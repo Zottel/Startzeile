@@ -36,7 +36,7 @@ class Database(interface.Database):
 
 		return result
 	
-	def getLinksByQuery(self):
+	def getLinksByQuery(self, query):
 		#TODO
 		raise interface.NotImplemented()
 		pass
@@ -46,7 +46,7 @@ class Database(interface.Database):
 		raise interface.NotImplemented()
 		pass
 	
-	def getTagsByQuery(self, tags):
+	def getTagsByQuery(self, query):
 		#TODO
 		raise interface.NotImplemented()
 		pass
