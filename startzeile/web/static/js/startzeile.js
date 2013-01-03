@@ -63,9 +63,11 @@ function ResultList(startzeile, default_results) {
 
 function Searchbox(startzeile, default_search) {
 	var shown = false;
+	var search_container = undefined;
 	
-	this.show = function(search_container) {
-		$(default_search).
+	this.show = function(s_container) {
+		search_container = s_container;
+		$(s_container).val('');
 	}
 	
 	// Setup
