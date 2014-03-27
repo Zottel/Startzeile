@@ -1,0 +1,173 @@
+<Project>
+  <Name>Startzeile</Name>
+  <ProjectItem type="NClass.DiagramEditor.ClassDiagram.Diagram" assembly="NClass.DiagramEditor, Version=2.4.1823.0, Culture=neutral, PublicKeyToken=null">
+    <Name>Datenbank</Name>
+    <Language>CSharp</Language>
+    <Entities>
+      <Entity type="Class">
+        <Name>Collection</Name>
+        <Access>Public</Access>
+        <Location left="1008" top="724" />
+        <Size width="512" height="196" />
+        <Collapsed>False</Collapsed>
+        <Member type="Method">public void getName()</Member>
+        <Member type="Method">public User getOwner()</Member>
+        <Member type="Method">public void getLinks(String[] Tags, String Query)</Member>
+        <Member type="Method">public Group getGroups()</Member>
+        <Member type="Method">public void setGroups(Group[] groups)</Member>
+        <Member type="Method">public bool isReadable(User user)</Member>
+        <Member type="Method">public void delete()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>Link</Name>
+        <Access>Public</Access>
+        <Location left="1223" top="975" />
+        <Size width="388" height="216" />
+        <Collapsed>False</Collapsed>
+        <Member type="Method">public void getID()</Member>
+        <Member type="Method">public void getURL()</Member>
+        <Member type="Method">public void setURL()</Member>
+        <Member type="Method">public String[] getTags()</Member>
+        <Member type="Method">public void setTags(String[] tags)</Member>
+        <Member type="Method">public String getTitle()</Member>
+        <Member type="Method">public void setTitle(String title)</Member>
+        <Member type="Method">public void delete()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>User</Name>
+        <Access>Public</Access>
+        <Location left="558" top="724" />
+        <Size width="388" height="196" />
+        <Collapsed>False</Collapsed>
+        <Member type="Method">public Collection[] getCollections()</Member>
+        <Member type="Method">public String getName()</Member>
+        <Member type="Method">public Group[] getGroups()</Member>
+        <Member type="Method">public void addGroup(String name)</Member>
+        <Member type="Method">public void addCollection(String name)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>Group</Name>
+        <Access>Public</Access>
+        <Location left="855" top="975" />
+        <Size width="319" height="216" />
+        <Collapsed>False</Collapsed>
+        <Member type="Method">public void setName(String name)</Member>
+        <Member type="Method">public String getName()</Member>
+        <Member type="Method">public User getOwner()</Member>
+        <Member type="Method">public void addMember(User member)</Member>
+        <Member type="Method">public void removeMember(User member)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>Database</Name>
+        <Access>Public</Access>
+        <Location left="558" top="494" />
+        <Size width="388" height="177" />
+        <Collapsed>False</Collapsed>
+        <Member type="Method">public User getUser(String name)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>User</Name>
+        <Access>Public</Access>
+        <Location left="1881" top="410" />
+        <Size width="162" height="216" />
+        <Collapsed>False</Collapsed>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>Login</Name>
+        <Access>Public</Access>
+        <Location left="1881" top="709" />
+        <Size width="162" height="216" />
+        <Collapsed>False</Collapsed>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>OpenID</Name>
+        <Access>Public</Access>
+        <Location left="2110" top="709" />
+        <Size width="162" height="216" />
+        <Collapsed>False</Collapsed>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>OAuthClient</Name>
+        <Access>Public</Access>
+        <Location left="2110" top="410" />
+        <Size width="162" height="216" />
+        <Collapsed>False</Collapsed>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>Role</Name>
+        <Access>Public</Access>
+        <Location left="1881" top="120" />
+        <Size width="162" height="216" />
+        <Collapsed>False</Collapsed>
+        <Modifier>None</Modifier>
+      </Entity>
+    </Entities>
+    <Relationships>
+      <Relationship type="Association" first="0" second="1">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Aggregation</AssociationType>
+        <StartMultiplicity>0..*</StartMultiplicity>
+        <EndMultiplicity>1</EndMultiplicity>
+      </Relationship>
+      <Relationship type="Association" first="2" second="3">
+        <Label>
+        </Label>
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Horizontal</EndOrientation>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Aggregation</AssociationType>
+      </Relationship>
+      <Relationship type="Association" first="2" second="0">
+        <Label>
+        </Label>
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Horizontal</EndOrientation>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Aggregation</AssociationType>
+      </Relationship>
+      <Relationship type="Association" first="0" second="3">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Association</AssociationType>
+        <StartMultiplicity>0..*</StartMultiplicity>
+        <EndMultiplicity>0..*</EndMultiplicity>
+      </Relationship>
+      <Relationship type="Association" first="4" second="2">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Aggregation</AssociationType>
+        <StartMultiplicity>0..*</StartMultiplicity>
+        <EndMultiplicity>1</EndMultiplicity>
+      </Relationship>
+      <Relationship type="Generalization" first="5" second="9">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Generalization" first="6" second="5">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Generalization" first="7" second="5">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Generalization" first="8" second="9">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+    </Relationships>
+  </ProjectItem>
+</Project>
