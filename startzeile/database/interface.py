@@ -29,6 +29,28 @@ class Database():
 	
 	def addLink(self, title, url, description, tags):
 		pass
+	
+	def getUser(self):
+		pass
+	
+	def getGroup(self):
+		pass
+
+class User():
+	def getName(self):
+		pass
+	
+	def validatePassword(self, password):
+		pass
+	
+	def hasPermission(self, name):
+		pass
+	
+	def getGroups(self):
+		pass
+
+class Group():
+	pass
 
 class Link():
 	def __init__(self, db):
@@ -41,6 +63,9 @@ class Link():
 		pass
 	
 	def setTitle(self, newTitle):
+		pass
+	
+	def getOwner(self):
 		pass
 	
 	def getURL(self):

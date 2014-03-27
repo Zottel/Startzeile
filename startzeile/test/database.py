@@ -118,6 +118,8 @@ class deleteLinkTest(DBTestCase):
 		with self.assertRaises(interface.LinkDeleted):
 			link.delete()
 
+#TODO: Create tests for user/group db f00
+
 def createDBSuite(db):
 	suite = unittest.TestSuite()
 	tests = []
