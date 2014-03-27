@@ -1,0 +1,25 @@
+collection
+collection/search
+collection/tags
+collection/tags/public/test
+collection/permissions
+collection/id/<id>
+
+
+collection/.json
+collection/sql/python/.json
+collection/<id>.(json|html|xml)
+
+[
+{
+	type: 'link',
+	id: '12345',
+	url:'/collection/_12345',
+}
+{
+	type: 'link',
+	id: '12345',
+	url:'/collection/_12345',
+}
+
+]
